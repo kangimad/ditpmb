@@ -11,7 +11,8 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-8">
                 <form action="/postingan" method="get" class="d-flex">
-                    <input class="form-control me-2" name="search" value="{{ request('search') }}" type="search" placeholder="Masukkan kata kunci ..." aria-label="Search">
+                    <input class="form-control me-2" name="search" value="{{ request('search') }}" type="search"
+                        placeholder="Masukkan kata kunci ..." aria-label="Search">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
             </div>
@@ -27,7 +28,11 @@
                             <h5 class="card-title">{{ $postingan[0]->judul }}</h5>
                             <small>
                                 <p class="card-subtitle">
-                                    By : <a href="/author/{{ $postingan[0]->author->name }}" class="text-decoration-none">{{ $postingan[0]->author->name }}</a> in <a href="/kategori/{{ $postingan[0]->kategori->nama }}" class="text-decoration-none">{{ $postingan[0]->kategori->nama }}</a> {{ $postingan[0]->created_at->diffForHumans() }}</p>
+                                    By : <a href="/author/{{ $postingan[0]->author->name }}"
+                                        class="text-decoration-none">{{ $postingan[0]->author->name }}</a> in <a
+                                        href="/kategori/{{ $postingan[0]->kategori->nama }}"
+                                        class="text-decoration-none">{{ $postingan[0]->kategori->nama }}</a>
+                                    {{ $postingan[0]->created_at->diffForHumans() }}</p>
                                 <p class="card-text mt-3">{{ $postingan[0]->ringkasan }}</p>
                                 <a href="/postingan/{{ $postingan[0]->slug }}" class="btn btn-primary mt-3">Read more</a>
                             </small>
@@ -57,6 +62,10 @@
                         </div>
                     </div>
                 @endforeach
+                <hr>
+                <div class="d-flex justify-content-center">
+                    {{ $postingan->links() }}
+                </div>
             </div>
         @else
             <p class="h5 text-center mt-4">
