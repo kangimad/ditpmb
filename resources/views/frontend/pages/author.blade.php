@@ -8,6 +8,16 @@
             </div>
         </div>
 
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+                <form action="/author/{{ $author }}" method="get" class="d-flex">
+                    <input class="form-control me-2" name="search" value="{{ request('search') }}" type="search"
+                        placeholder="Masukkan kata kunci ..." aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
         @if ($postingan->count())
             <div class="row">
                 @foreach ($postingan as $post)

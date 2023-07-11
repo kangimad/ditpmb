@@ -19,11 +19,18 @@ class Postingan extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        if (isset($filters['search']) ? $filters['search']  : false) { // nek ono pencarian sek diinput maka pencariane ditangkep terus nampilke judul sek sesuai ro pencarian
-            return $query->where('judul', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('ringkasan', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('isi', 'like', '%' . $filters['search'] . '%');
-        }  // nek raono pencarian, langsung tampilke kabeh berdasarkan sek paling baru sesuai ng Controller
+        // if (isset($filters['search']) ? $filters['search']  : false) { // nek ono pencarian sek diinput maka pencariane ditangkep terus nampilke judul sek sesuai ro pencarian
+        //     return $query->where('judul', 'like', '%' . $filters['search'] . '%')
+        //         ->orWhere('ringkasan', 'like', '%' . $filters['search'] . '%')
+        //         ->orWhere('isi', 'like', '%' . $filters['search'] . '%');
+        // }  // nek raono pencarian, langsung tampilke kabeh berdasarkan sek paling baru sesuai ng Controller
+
+        $query -> when($filters['search'] ?? false, function($query, $search)
+        {
+            return $query->where('judul', 'like', '%' . $search . '%')
+                ->orWhere('ringkasan', 'like', '%' . $search . '%')
+                ->orWhere('isi', 'like', '%' . $search . '%');
+        });
     }
 
     public function kategori()

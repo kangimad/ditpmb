@@ -47,4 +47,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Postingan::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function($query, $search)
+        {
+            return $query->where('judul', 'like' . '%' . $search . '%')
+                    ->orWhere('ringkasan', 'like' . '%' . $search . '%')
+                    ->orWhere('isi', 'like' . '%' . $search . '%');
+        });
+    }
 }
