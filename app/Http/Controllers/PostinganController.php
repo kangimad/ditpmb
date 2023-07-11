@@ -21,7 +21,7 @@ class PostinganController extends Controller
             'active' => 'Postingan',
             'subtitle' => 'Postingan',
             // 'postingan' => Postingan::all()
-            'postingan' => Postingan::latest()->filter()->paginate(7)
+            'postingan' => Postingan::latest()->filter(request(['search']))->paginate(7)
         ]);
     }
 

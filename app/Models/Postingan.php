@@ -17,12 +17,12 @@ class Postingan extends Model
 
     protected $with = ['kategori', 'author'];
 
-    public function scopeFilter($query)
+    public function scopeFilter($query, array $filters)
     {
-        if (request('search')) { // nek ono pencarian sek diinput maka pencariane ditangkep terus nampilke judul sek sesuai ro pencarian
-            return $query->where('judul', 'like', '%' . request('search') . '%')
-                ->orWhere('ringkasan', 'like', '%' . request('search') . '%')
-                ->orWhere('isi', 'like', '%' . request('search') . '%');
+        if (isset($filters['search']) ? $filters['search']  : false) { // nek ono pencarian sek diinput maka pencariane ditangkep terus nampilke judul sek sesuai ro pencarian
+            return $query->where('judul', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('ringkasan', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('isi', 'like', '%' . $filters['search'] . '%');
         }  // nek raono pencarian, langsung tampilke kabeh berdasarkan sek paling baru sesuai ng Controller
     }
 
